@@ -1,6 +1,8 @@
 import { IMovie } from "./models/Movie";
 import { getData } from "./services/movieservice";
 
+jest.mock("./services/movieservice.ts")
+
 let movies: IMovie[] = [];
 
 export const init = () => {
@@ -24,12 +26,15 @@ export async function handleSubmit() {
     movies = await getData(searchText);
 
     if (movies.length > 0) {
-      exports.createHtml(movies, container);
+      // exports.
+      createHtml(movies, container);
     } else {
-      exports.displayNoResult(container);
+      // exports.
+      displayNoResult(container);
     }
   } catch {
-    exports.displayNoResult(container);
+    // exports.
+    displayNoResult(container);
   }
 }
 
