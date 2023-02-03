@@ -9,6 +9,8 @@ export const getData = async (searchText: string): Promise<IMovie[]> => {
       return data.data.Search;
     })
     .catch(() => {
+      console.log("we caught the error here!");
+      throw new Error("Meh");
       return [];
     });
 };
