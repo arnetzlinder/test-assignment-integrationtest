@@ -1,6 +1,5 @@
 import { IMovie } from "../../models/Movie";
-import { IOmdbResponse } from "../../models/IOmdbResponse";
-import axios from "axios";
+
 
 export let testData: IMovie[] = [
                     {
