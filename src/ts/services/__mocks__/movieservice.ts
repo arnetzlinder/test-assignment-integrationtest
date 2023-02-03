@@ -1,6 +1,8 @@
 import { IMovie } from "../../models/Movie";
+import { IOmdbResponse } from "../../models/IOmdbResponse";
+import axios from "axios";
 
-let testData: IMovie[] = [
+export let testData: IMovie[] = [
                     {
                         Title: "Titanic",
                         imdbID: "tt0120338",
@@ -24,9 +26,25 @@ let testData: IMovie[] = [
                     },
 ];
 
-export async function getData(): Promise<IMovie[]> {
-    return new Promise((resolve) => {
-        resolve(testData);
-    });
-}
+// export async function getData(searchText: string): Promise<IMovie[]> {
+//     return new Promise((resolve, reject) => {
+//         if (testData.length > 0 && searchText !== "error") {
+//             resolve ({data: {Search: testData}, status: 200});
+//         } else {
+//             reject({ data: [], status: 500});
+//             throw new Error("Meh");
+//     }
+// });
+// }
+
+// export const getData = async (searchText: string): Promise<IMovie[]> => {
+//     return axios
+//       .get<IOmdbResponse>("http://omdbapi.com/?apikey=416ed51a&s=" + searchText)
+//       .then((data) => {
+//         return data.data.Search;
+//       })
+//       .catch(() => {
+//         return [];
+//       });
+//   };
 
