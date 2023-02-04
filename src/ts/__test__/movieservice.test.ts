@@ -12,7 +12,6 @@ jest.mock('axios', () => ({
         return new Promise((resolve, reject) => {
             if(url.endsWith("error")) {
                 console.log("An error occured!");
-                // throw new Error;
                 reject([]);
             } else {
                 resolve({ data: {Search: testData } });
@@ -20,8 +19,7 @@ jest.mock('axios', () => ({
         });
     },
     catch: async () => {
-        console.log("We should catch the error here");
-                
+        console.log("We should catch the error here");        
     }
 }));
 

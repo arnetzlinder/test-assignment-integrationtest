@@ -1,4 +1,7 @@
 import { IMovie } from "../../models/Movie";
+import axios from "axios";
+import { IOmdbResponse } from "../../models/IOmdbResponse";
+
 
 
 export let testData: IMovie[] = [
@@ -46,4 +49,20 @@ export let testData: IMovie[] = [
 //         return [];
 //       });
 //   };
-
+export const getData = async (searchText: string): Promise<IMovie[]> => {
+    if (searchText === "") {
+        return [];
+    }
+    return testData;
+    console.log("Trying to look up "+searchText);
+    return axios
+      .get<IOmdbResponse>("http://omdbapi.com/?apikey=416ed51a&s=" + searchText)
+      .then((data) => {
+        console.log(data.data.Search);
+        return data.data.Search;
+      })
+      .catch(() => {
+        console.log("we caught the error here!");
+        throw new Error("Meh");
+      });
+  };

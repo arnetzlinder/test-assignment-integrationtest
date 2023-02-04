@@ -1,7 +1,7 @@
 import { IMovie } from "./models/Movie";
 import { getData } from "./services/movieservice";
 
-jest.mock("./services/movieservice.ts")
+//jest.mock("./services/movieservice.ts")
 
 let movies: IMovie[] = [];
 
@@ -9,14 +9,14 @@ export const init = () => {
   let form = document.getElementById("searchForm") as HTMLFormElement;
   form.addEventListener("submit", (e: SubmitEvent) => {
     e.preventDefault();
-    handleSubmit();
+    exports.handleSubmit();
   });
 };
 
 export async function handleSubmit() {
   let searchText = (document.getElementById("searchText") as HTMLInputElement)
     .value;
-
+  
   let container: HTMLDivElement = document.getElementById(
     "movie-container"
   ) as HTMLDivElement;
@@ -24,17 +24,17 @@ export async function handleSubmit() {
 
   try {
     movies = await getData(searchText);
-
+    
     if (movies.length > 0) {
-      // exports.
-      createHtml(movies, container);
+      exports.createHtml(movies, container);
+
     } else {
-      // exports.
-      displayNoResult(container);
+      exports.displayNoResult(container);
+
     }
   } catch {
-    // exports.
-    displayNoResult(container);
+   exports.displayNoResult(container);
+   
   }
 }
 
