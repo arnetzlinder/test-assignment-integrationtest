@@ -53,6 +53,9 @@ export const getData = async (searchText: string): Promise<IMovie[]> => {
     if (searchText === "") {
         return [];
     }
+    if (searchText === "error") {
+        throw new Error;
+    }
     return testData;
     console.log("Trying to look up "+searchText);
     return axios
