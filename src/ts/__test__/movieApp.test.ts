@@ -114,5 +114,25 @@ jest.mock("../services/movieservice");
         expect(spyDisplayNoResults).toHaveBeenCalled();
         spyDisplayNoResults.mockRestore();
 
+    });
+
+    test("calling displayNoResult when there is an error", async () => {
+            //Arrange
+            document.body.innerHTML = 
+            `<form id="searchForm">
+            <input type="text" id="searchText" placeholder="Skriv titel här" />
+            <button type="submit" id="search">Sök</button>
+            </form>
+            <div id="movie-container"></div>`;
+        
+            let searchText = (document.getElementById("searchText") as HTMLInputElement).value = "error";
+            let spyDisplayNoResults = jest.spyOn(movieApp, 'displayNoResult').mockReturnValue();
+             
+            //Act
+            await movieApp.handleSubmit();
+                     
+            //Assert
+            expect(spyDisplayNoResults).toHaveBeenCalled();
+            spyDisplayNoResults.mockRestore();
     })
 });
