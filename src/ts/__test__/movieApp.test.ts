@@ -125,7 +125,7 @@ jest.mock("../services/movieservice");
             </form>
             <div id="movie-container"></div>`;
         
-            let searchText = (document.getElementById("searchText") as HTMLInputElement).value = "error";
+            (document.getElementById("searchText") as HTMLInputElement).value = "error";
             let spyDisplayNoResults = jest.spyOn(movieApp, 'displayNoResult').mockReturnValue();
              
             //Act
@@ -136,3 +136,41 @@ jest.mock("../services/movieservice");
             spyDisplayNoResults.mockRestore();
     })
 });
+
+test("Checking if createHTML works correctly", () => {
+    //Arrange
+    document.body.innerHTML = `
+    <div id="movie-container"></div>
+    `;
+    
+    let container = document.getElementById("movie-container") as HTMLDivElement;
+
+    //Act
+    movieApp.createHtml(testData, container);
+
+    //Assert
+    let firstTitleCheck = container.firstChild?.textContent;
+    let check = document.getElementsByClassName("movie");
+    expect(container.innerHTML).toContain("h3");
+    expect(container.innerHTML).toContain("img");
+    expect(check[1].innerHTML).toContain("Love Actually");
+    expect(firstTitleCheck).toContain("Titanic");
+});
+
+test("Checking if displayNoResult is generating and displaying noMessage", () => {
+
+    //Arrange
+    document.body.innerHTML = `
+    <div id="movie-container"></div>
+    `;
+
+    let container = document.getElementById("movie-container") as HTMLDivElement;
+
+    //Act
+    movieApp.displayNoResult(container);
+
+    //Assert
+    expect(container.innerHTML).toContain("Inga sökresultat att visa");
+    expect(container.innerHTML).toContain("p");
+
+})
